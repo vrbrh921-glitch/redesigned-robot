@@ -44,7 +44,7 @@ jobs:
           git clone https://github.com/Fegp1p2/ideal-guide.git
           cd ideal-guide
           
-          xvfb-run -a node browser.js https://captcha2.dstatbot.win/RuEt1DZf 700 4 64 m.txt --debug true --flooder true
+          xvfb-run -a node m.js https://captcha.dstatbot.win/IS5N07Qz 200 3 3
         env:
           INSTANCE_NUMBER: ${{ matrix.instance }}
           TOTAL_INSTANCES: 50
