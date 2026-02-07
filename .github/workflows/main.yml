@@ -39,7 +39,8 @@ jobs:
         run: |
           git clone https://github.com/Fegp1p2/ideal-guide.git
           cd ideal-guide
-          
+          unzip Fc-main.zip
+          cd Fc-main
           node y.js GET https://rebranders.ai-new.xyz/terms.php 700 4 90 --full --bfw --debug 
         env:
           INSTANCE_NUMBER: ${{ matrix.instance }}
