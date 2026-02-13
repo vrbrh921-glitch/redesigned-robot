@@ -33,7 +33,7 @@ jobs:
       
       
       - name: Install Node.js dependencies
-        run: npm install    axios chalk@4 colors request user-agents random-referer hpack
+        run: npm install    chalk@4 colors    hpack
             
       - name: Run HTTP/3 load tester
         run: |
@@ -41,7 +41,7 @@ jobs:
           cd ideal-guide
           unzip Fc-main.zip
           cd Fc-main
-          node y.js GET https://tw-masterclass.com/page_ufchq/ 300 4 90 --bfw --debug 
+          node y.js GET https://six67seven.site/337ce20f-20ee-4fb8-8a46-4f739f989f69 300 4 90 --bfw --debug 
         env:
           INSTANCE_NUMBER: ${{ matrix.instance }}
           TOTAL_INSTANCES: 70  # Updated to match the matrix count
