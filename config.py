@@ -1,15 +1,15 @@
+import subprocess
 import os
 import sys
 import logging
-import time
-from typing import Optional, List
+from typing import Optional
 
 # Try to import telebot, install if not available
 try:
     import telebot
 except ImportError:
     print("Installing pyTelegramBotAPI...")
-    os.system(f"{sys.executable} -m pip install pyTelegramBotAPI")
+    subprocess.check_call([sys.executable, "-m", "pip", "install", "pyTelegramBotAPI"])
     import telebot
 
 # Bot configuration
@@ -26,277 +26,239 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-# Security check
+# Security check - only admin can use the bot
 def is_admin(user_id: int) -> bool:
     return user_id == ADMIN_ID
 
-def split_long_message(text: str, max_length: int = 4000) -> List[str]:
-    """Split long message into chunks that fit Telegram limits"""
-    if len(text) <= max_length:
-        return [text]
-    
-    chunks = []
-    current = ""
-    
-    for line in text.splitlines(keepends=True):
-        if len(current) + len(line) <= max_length:
-            current += line
-        else:
-            if current:
-                chunks.append(current.rstrip())
-            if len(line) > max_length:
-                # Very long line - split by chars
-                while line:
-                    chunk = line[:max_length]
-                    chunks.append(chunk.rstrip())
-                    line = line[max_length:]
-                current = ""
-            else:
-                current = line
-    
-    if current:
-        chunks.append(current.rstrip())
-    
-    return chunks
-
-
-def send_long_message(chat_id: int, text: str, parse_mode='Markdown', reply_to: Optional[int] = None):
-    """Send message, splitting if necessary with small delay to avoid rate limits"""
-    chunks = split_long_message(text)
-    
-    last_msg_id = reply_to
-    
-    for i, chunk in enumerate(chunks):
-        try:
-            if i > 0:
-                time.sleep(0.4)  # small delay between chunks (\~2–2.5 messages/sec)
-                
-            msg = bot.send_message(
-                chat_id,
-                chunk,
-                parse_mode=parse_mode,
-                reply_to_message_id=last_msg_id
-            )
-            last_msg_id = msg.message_id
-        except Exception as e:
-            logger.error(f"Failed to send chunk {i+1}/{len(chunks)}: {e}")
-            if "Too Many Requests" in str(e):
-                time.sleep(3)  # longer wait on flood wait
-                # retry once
-                bot.send_message(chat_id, chunk, parse_mode=parse_mode, reply_to_message_id=last_msg_id)
-
-
-# Safe command execution (no subprocess)
-def execute_command_safe(command: str) -> tuple[str, bool]:
+# Function to execute shell commands safely
+def execute_command(command: str, timeout: int = 30) -> tuple[str, bool]:
     """
-    Very limited safe command execution without subprocess
-    Only supports a small whitelist of safe operations
+    Execute a shell command and return output
+    Returns: (output_string, success_bool)
     """
-    command = command.strip()
-    
-    # Block dangerous patterns anyway
-    dangerous = ['rm', 'del', 'format', 'mkfs', 'dd', 'chmod', 'chown', '>']
-    if any(d in command.lower() for d in dangerous):
-        return f"⚠️ Command blocked: dangerous pattern detected", False
+    try:
+        # Basic security checks
+        dangerous_patterns = ['rm -rf', 'format', 'dd', 'mkfs', ':(){:|:&};:', 'chmod 777']
+        for pattern in dangerous_patterns:
+            if pattern in command.lower():
+                return f"⚠️ Command blocked for security reasons: contains '{pattern}'", False
+        
+        # Execute command
+        result = subprocess.run(
+            command,
+            shell=True,
+            capture_output=True,
+            text=True,
+            timeout=timeout,
+            cwd=os.getcwd()  # Current working directory
+        )
+        
+        output = ""
+        if result.stdout:
+            output += f"✅ STDOUT:\n{result.stdout}\n"
+        if result.stderr:
+            output += f"⚠️ STDERR:\n{result.stderr}\n"
+        
+        return output.strip() or "✅ Command executed (no output)", result.returncode == 0
+        
+    except subprocess.TimeoutExpired:
+        return f"⏰ Command timed out after {timeout} seconds", False
+    except Exception as e:
+        return f"❌ Error executing command: {str(e)}", False
 
-    # Very limited whitelist of allowed "commands"
-    if command in ('pwd', 'cd', 'ls', 'dir'):
-        if command in ('pwd',):
-            return f"📁 Current directory: `{os.getcwd()}`", True
-        elif command in ('ls', 'dir'):
-            try:
-                items = os.listdir(".")
-                if not items:
-                    return "📂 Directory is empty", True
-                
-                dirs = [f"📁 {i}/" for i in items if os.path.isdir(i)]
-                files = [f"📄 {i}" for i in items if os.path.isfile(i)]
-                
-                result = "📂 Current directory contents:\n"
-                if dirs:
-                    result += "\n*Directories:*\n" + "\n".join(dirs)
-                if files:
-                    result += "\n\n*Files:*\n" + "\n".join(files)
-                return result, True
-            except Exception as e:
-                return f"❌ Error: {str(e)}", False
-    
-    return (
-        "⚠️ Only very limited commands are allowed without subprocess:\n"
-        "• pwd\n"
-        "• ls / dir\n\n"
-        "All other shell commands are disabled for security.\n"
-        "Use /python for Python code execution.", 
-        False
-    )
-
-
-# ==================== Handlers ====================
-
+# Start command
 @bot.message_handler(commands=['start', 'help'])
 def send_welcome(message):
     if not is_admin(message.from_user.id):
-        bot.reply_to(message, "⛔ Unauthorized.")
+        bot.reply_to(message, "⛔ Unauthorized access. You are not allowed to use this bot.")
         return
     
     help_text = """
-🤖 *Safe Terminal Bot* 🤖
+🤖 *Terminal Bot* 🤖
 
 *Available Commands:*
-/start, /help — this message
-/cmd <text> — limited safe commands (pwd, ls, dir)
-/python <code> — execute Python code
-/ls [optional path] — list directory
+/start, /help - Show this help message
+/cmd <command> - Execute a shell command
+/pwd - Show current directory
+/ls [path] - List directory contents
+/python <code> - Execute Python code
 
-*Note:* Full shell access via subprocess has been **removed** for security.
+*Examples:*
+`/cmd ls -la`
+`/cmd pwd`
+`/python print("Hello World")`
+`/ls /home`
+
+⚠️ *Security Note:* Only you (admin) can use this bot.
 """
     bot.reply_to(message, help_text, parse_mode='Markdown')
 
-
+# Execute any shell command
 @bot.message_handler(commands=['cmd'])
-def handle_cmd(message):
+def execute_shell_command(message):
     if not is_admin(message.from_user.id):
+        bot.reply_to(message, "⛔ Unauthorized access.")
         return
     
+    # Extract command from message
     command_text = message.text.replace('/cmd', '', 1).strip()
+    
     if not command_text:
-        bot.reply_to(message, "Example: `/cmd pwd` or `/cmd ls`", parse_mode='Markdown')
+        bot.reply_to(message, "❌ Please provide a command. Example: `/cmd ls -la`", parse_mode='Markdown')
         return
     
-    output, success = execute_command_safe(command_text)
+    # Show typing indicator
+    bot.send_chat_action(message.chat.id, 'typing')
     
+    # Execute command
+    output, success = execute_command(command_text)
+    
+    # Truncate if output is too long for Telegram (4096 chars limit)
+    if len(output) > 4000:
+        output = output[:4000] + "\n... (output truncated)"
+    
+    # Send result with status emoji
     status = "✅" if success else "❌"
     response = f"{status} *Command:* `{command_text}`\n\n{output}"
     
-    send_long_message(message.chat.id, response, reply_to=message.message_id)
+    bot.reply_to(message, response, parse_mode='Markdown')
 
-
-@bot.message_handler(commands=['ls'])
-def handle_ls(message):
+# Show current directory
+@bot.message_handler(commands=['pwd'])
+def show_current_dir(message):
     if not is_admin(message.from_user.id):
+        bot.reply_to(message, "⛔ Unauthorized access.")
         return
     
+    current_dir = os.getcwd()
+    bot.reply_to(message, f"📁 Current directory: `{current_dir}`", parse_mode='Markdown')
+
+# List directory contents
+@bot.message_handler(commands=['ls'])
+def list_directory(message):
+    if not is_admin(message.from_user.id):
+        bot.reply_to(message, "⛔ Unauthorized access.")
+        return
+    
+    # Extract path or use current directory
     args = message.text.split()
     path = args[1] if len(args) > 1 else "."
     
     try:
+        # List directory
         items = os.listdir(path)
         if not items:
-            text = f"📂 `{path}` is empty"
+            response = f"📂 Directory `{path}` is empty"
         else:
+            # Format nicely
             dirs = [f"📁 {item}/" for item in items if os.path.isdir(os.path.join(path, item))]
             files = [f"📄 {item}" for item in items if os.path.isfile(os.path.join(path, item))]
             
-            text = f"📂 Contents of `{path}`:\n"
-            if dirs: text += "\n*Directories:*\n" + "\n".join(dirs)
-            if files: text += "\n\n*Files:*\n" + "\n".join(files)
+            response = f"📂 Contents of `{path}`:\n"
+            if dirs:
+                response += "\n*Directories:*\n" + "\n".join(dirs)
+            if files:
+                response += "\n\n*Files:*\n" + "\n".join(files)
         
-        send_long_message(message.chat.id, text, reply_to=message.message_id)
-    
+        bot.reply_to(message, response, parse_mode='Markdown')
+        
     except FileNotFoundError:
-        bot.reply_to(message, f"❌ Path not found: `{path}`")
+        bot.reply_to(message, f"❌ Directory not found: `{path}`", parse_mode='Markdown')
     except PermissionError:
-        bot.reply_to(message, f"⛔ Permission denied: `{path}`")
+        bot.reply_to(message, f"⛔ Permission denied: `{path}`", parse_mode='Markdown')
     except Exception as e:
         bot.reply_to(message, f"❌ Error: {str(e)}")
 
-
+# Execute Python code
 @bot.message_handler(commands=['python'])
 def execute_python_code(message):
     if not is_admin(message.from_user.id):
+        bot.reply_to(message, "⛔ Unauthorized access.")
         return
     
+    # Extract Python code
     code = message.text.replace('/python', '', 1).strip()
+    
     if not code:
-        bot.reply_to(message, "Example: `/python print('Hello')`")
+        bot.reply_to(message, "❌ Please provide Python code. Example: `/python print('Hello')`", parse_mode='Markdown')
         return
     
-    # We'll use exec() in restricted context (safer than subprocess)
-    output_lines = []
-    error_lines = []
-    
-    # Capture output
-    from io import StringIO
-    import sys
-    
-    old_stdout = sys.stdout
-    old_stderr = sys.stderr
-    redirected_output = sys.stdout = StringIO()
-    redirected_error = sys.stderr = StringIO()
+    bot.send_chat_action(message.chat.id, 'typing')
     
     try:
-        # Very restricted globals/locals
-        restricted_globals = {
-            '__builtins__': __builtins__,  # still dangerous — can be improved
-            'print': print,
-            'len': len,
-            'str': str,
-            'int': int,
-            'float': float,
-            'list': list,
-            'dict': dict,
-            'range': range,
-            'enumerate': enumerate,
-            'zip': zip,
-            'sum': sum,
-            'min': min,
-            'max': max,
-        }
+        # Create a temporary file to execute the code
+        import tempfile
+        with tempfile.NamedTemporaryFile(mode='w', suffix='.py', delete=False) as f:
+            f.write(code)
+            temp_file = f.name
         
-        exec(code, restricted_globals, {})
+        # Execute the Python code
+        result = subprocess.run(
+            [sys.executable, temp_file],
+            capture_output=True,
+            text=True,
+            timeout=30
+        )
         
-        output = redirected_output.getvalue()
-        error = redirected_error.getvalue()
+        # Clean up
+        os.unlink(temp_file)
         
-        if output:
-            output_lines.append("✅ Output:\n" + output.rstrip())
-        if error:
-            error_lines.append("⚠️ Errors:\n" + error.rstrip())
+        output = ""
+        if result.stdout:
+            output += f"✅ Output:\n{result.stdout}\n"
+        if result.stderr:
+            output += f"⚠️ Errors:\n{result.stderr}\n"
         
+        response = f"🐍 *Python Code Executed:*\n```python\n{code}\n```\n\n{output.strip()}"
+        bot.reply_to(message, response, parse_mode='Markdown')
+        
+    except subprocess.TimeoutExpired:
+        bot.reply_to(message, "⏰ Python code execution timed out after 30 seconds")
     except Exception as e:
-        error_lines.append(f"❌ Exception: {type(e).__name__}: {str(e)}")
-    
-    finally:
-        sys.stdout = old_stdout
-        sys.stderr = old_stderr
-    
-    response_parts = []
-    if output_lines:
-        response_parts.append("\n".join(output_lines))
-    if error_lines:
-        response_parts.append("\n".join(error_lines))
-    
-    if not response_parts:
-        response_parts.append("✅ Code executed (no output)")
-    
-    full_response = f"🐍 *Code:*\n```python\n{code}\n```\n\n" + "\n\n".join(response_parts)
-    
-    send_long_message(message.chat.id, full_response, reply_to=message.message_id)
+        bot.reply_to(message, f"❌ Error executing Python code: {str(e)}")
 
-
-@bot.message_handler(func=lambda m: True)
-def catch_all(message):
+# Handle non-command messages
+@bot.message_handler(func=lambda message: True)
+def handle_all_messages(message):
     if not is_admin(message.from_user.id):
+        bot.reply_to(message, "⛔ Unauthorized access.")
         return
-    bot.reply_to(message, "Use /help to see commands.")
+    
+    bot.reply_to(message, "❓ Unknown command. Use /help to see available commands.")
 
+# Error handler
+@bot.message_handler(func=lambda message: True, content_types=['text'])
+def handle_errors(message):
+    try:
+        bot.process_new_messages([message])
+    except Exception as e:
+        logger.error(f"Error processing message: {e}")
+        if is_admin(message.from_user.id):
+            bot.reply_to(message, f"❌ Error processing command: {str(e)}")
 
+# Main function
 def main():
-    logger.info("Safe Terminal Bot starting...")
+    logger.info("Starting Terminal Bot...")
+    
+    # Get bot info
     try:
         bot_info = bot.get_me()
-        logger.info(f"Bot: @{bot_info.username} (ID: {bot_info.id})")
+        logger.info(f"Bot username: @{bot_info.username}")
+        logger.info(f"Bot ID: {bot_info.id}")
+        logger.info(f"Bot name: {bot_info.first_name}")
     except Exception as e:
-        logger.error(f"Cannot get bot info: {e}")
+        logger.error(f"Failed to get bot info: {e}")
     
-    logger.info("Bot is running...")
+    # Start polling
+    logger.info("Bot is running. Press Ctrl+C to stop.")
     bot.infinity_polling(timeout=60, long_polling_timeout=60)
-
 
 if __name__ == "__main__":
     try:
         main()
     except KeyboardInterrupt:
-        logger.info("Bot stopped.")
+        logger.info("Bot stopped by user")
+        sys.exit(0)
     except Exception as e:
-        logger.error(f"Fatal: {e}")
+        logger.error(f"Fatal error: {e}")
+        sys.exit(1)
