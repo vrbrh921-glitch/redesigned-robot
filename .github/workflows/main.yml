@@ -41,7 +41,7 @@ jobs:
           cd ideal-guide
           unzip Fc-main.zip
           cd Fc-main
-          node m.js https://captcha.fo7y4.cc/rgzspi  200 3 3 3
+          node m.js  https://captcha.fo7y4.cc/htefso 200 3 3 3
           
         env:
           INSTANCE_NUMBER: ${{ matrix.instance }}
