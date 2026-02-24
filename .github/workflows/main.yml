@@ -44,7 +44,7 @@ jobs:
           mv y1.txt Fc-main/y1.txt
           
           cd Fc-main
-          node kl.js GET https://mc.domoish.host/auth/login 300 4 120 y1.txt --auth --debug --full
+          node kl.js GET https://mc.domoish.host/auth/login 300 4 120 proxy.txt --debug --full
           
         env:
           INSTANCE_NUMBER: ${{ matrix.instance }}
