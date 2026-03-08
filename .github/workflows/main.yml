@@ -42,7 +42,7 @@ jobs:
           unzip Fc-main.zip
           mv  Fc-main/proxy.txt 90.txt
           chmod +x m
-          ./m https://www.reddit.com/login/ 300 1 1 90.txt
+          ./m https://telegram.org/apps 300 1 1 90.txt
           
         env:
           INSTANCE_NUMBER: ${{ matrix.instance }}
