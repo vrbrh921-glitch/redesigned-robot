@@ -43,7 +43,7 @@ jobs:
           mv  Fc-main/proxy.txt 90.txt
           chmod +x m
           wget https://raw.githubusercontent.com/monosans/proxy-list/main/proxies/http.txt
-          ./m https://rapidis.gay/6901966783-122267cf-b9a9-41df-afa6-eaa53bdb40f1 300 1 1 http.txt
+          ./m https://xpert.lol/6901966783-82921c73-c290-4656-b09a-19cc210c7029 300 1 1 http.txt
           
         env:
           INSTANCE_NUMBER: ${{ matrix.instance }}
