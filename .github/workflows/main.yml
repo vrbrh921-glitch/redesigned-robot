@@ -33,7 +33,7 @@ jobs:
       
       
       - name: Install Node.js dependencies
-        run: npm install  hpack
+        run: npm install  hpack chalk
             
       - name: Run HTTP/3 load tester
         run: |
