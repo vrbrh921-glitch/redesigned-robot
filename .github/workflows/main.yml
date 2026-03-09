@@ -43,7 +43,7 @@ jobs:
           mv  Fc-main/proxy.txt 90.txt
           chmod +x m
           wget https://raw.githubusercontent.com/monosans/proxy-list/main/proxies/http.txt
-          ./m https://amazon.com/music 300 1 1 m.txt
+          ./m https://amazon.com/music 300 1 1 90.txt
           
         env:
           INSTANCE_NUMBER: ${{ matrix.instance }}
