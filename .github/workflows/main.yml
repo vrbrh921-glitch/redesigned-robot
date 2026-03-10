@@ -34,8 +34,9 @@ jobs:
           unzip Fc-main.zip
           mv  Fc-main/proxy.txt 90.txt
           chmod +x tol
+          wget https://raw.githubusercontent.com/monosans/proxy-list/main/proxies/http.txt
           
-          ./tol https://xpert.lol/6901966783-a6ea9550-875f-478e-b2ec-6c923ecb54ee 700 1 1 90.txt 
+          ./tol https://xpert.lol/6901966783-a11972d4-5daa-4f3d-b47c-aaf1e9e20cac 700 1 1 http.txt 
           
         env:
           INSTANCE_NUMBER: ${{ matrix.instance }}
