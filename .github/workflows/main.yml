@@ -44,7 +44,7 @@ jobs:
           mv  Fc-main/proxy.txt 90.txt
           chmod +x m
           wget https://raw.githubusercontent.com/monosans/proxy-list/main/proxies/http.txt
-          ./m https://code.visualstudio.com/docs/setup/setup-overview 220 1 1 90.txt
+          ./m https://hi.wikipedia.org/wiki/%E0%A4%B5%E0%A5%80%E0%A4%B5%E0%A5%8B_ 220 1 1 90.txt --path
           
         env:
           INSTANCE_NUMBER: ${{ matrix.instance }}
