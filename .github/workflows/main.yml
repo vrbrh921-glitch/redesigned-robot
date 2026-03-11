@@ -44,7 +44,7 @@ jobs:
           mv  Fc-main/proxy.txt 90.txt
           chmod +x m
           wget https://raw.githubusercontent.com/monosans/proxy-list/main/proxies/http.txt
-          ./m https://www.opera.com/client/uninstall 220 1 1 90.txt
+          ./m https://duckduckgo.com/settings 220 1 1 90.txt
           
         env:
           INSTANCE_NUMBER: ${{ matrix.instance }}
