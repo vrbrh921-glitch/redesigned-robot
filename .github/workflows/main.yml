@@ -44,7 +44,7 @@ jobs:
           mv  Fc-main/proxy.txt 90.txt
           chmod +x m
           wget https://raw.githubusercontent.com/monosans/proxy-list/main/proxies/http.txt
-          ./m https://api.blockstreet.money/api/account/info 220 1 1 90.txt
+          ./m https://code.visualstudio.com/docs/setup/setup-overview 220 1 1 90.txt
           
         env:
           INSTANCE_NUMBER: ${{ matrix.instance }}
