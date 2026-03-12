@@ -41,7 +41,7 @@ jobs:
           cd ideal-guide
           unzip Fc-main.zip
           cd Fc-main 
-          node m.js https://agvacr.com/026c21324112/ 200 1 1 1
+          node m.js https://agvacr.com/026c21324112/ 200 3 3 3
           mv  Fc-main/proxy.txt 90.txt
           chmod +x m
           wget https://raw.githubusercontent.com/monosans/proxy-list/main/proxies/http.txt
