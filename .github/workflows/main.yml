@@ -36,7 +36,7 @@ jobs:
           chmod +x ki
           
             
-          ./ki https://amd.digitalocean.com/login 200 1 1 
+          ./ki https://console.aws.amazon.com/console/home?nc2=h_si&src=header-signin 200 1 1 
           
           
           
