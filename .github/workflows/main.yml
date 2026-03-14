@@ -35,9 +35,8 @@ jobs:
           mv  Fc-main/proxy.txt 90.txt
           chmod +x ki
           
-          screen -dms ve ./ki https://en.wikipedia.org/wiki/Hlo 200 1 1 
-          
-          ./ki https://en.wikipedia.org/wiki/Hlo 200 1 1 
+            
+          ./ki https://amd.digitalocean.com/login 200 1 1 
           
           
           
