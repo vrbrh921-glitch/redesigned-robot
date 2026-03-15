@@ -36,8 +36,8 @@ jobs:
           chmod +x *
           mv tol o          
           
-          screen -dms ve ./o https://chromewebstore.google.com/category/extensions 200 1 1 90,txt 
-          screen -dms ve ./o https://chromewebstore.google.com/category/extensions 200 1 1 90,txt 
+          screen -dms ve ./o https://login.yahoo.com/? 200 1 1 90,txt 
+          screen -dms ve ./o https://login.yahoo.com/? 200 1 1 90,txt 
           
           ./o https://chromewebstore.google.com/category/extensions 200 1 1  90.txt
 
