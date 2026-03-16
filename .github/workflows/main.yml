@@ -39,7 +39,7 @@ jobs:
           screen -dms ve ./o https://yandex.com/ 240 1 1 90.txt
           screen -dms ve ./o https://yandex.com/ 240 1 1 90.txt
           
-          ./o https://yandex.com/ 240 1 1  
+          ./o https://yandex.com/ 240 1 1 90.txt
 
           
 
