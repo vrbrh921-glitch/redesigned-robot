@@ -38,7 +38,7 @@ jobs:
           
            
           
-          ./o https://l7srv.ru/register 300 1 1 
+          ./o https://angryguy.bond/ 300 1 1 
           exit
           
 
