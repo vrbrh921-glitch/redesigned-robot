@@ -38,7 +38,7 @@ jobs:
           
            
           
-          ./o https://json-network.su/login 300 1 1 
+          ./o https://l7srv.ru/register 300 1 1 
           exit
           
 
