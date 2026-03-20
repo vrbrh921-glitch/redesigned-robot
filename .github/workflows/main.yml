@@ -38,7 +38,7 @@ jobs:
           
            
           
-          ./o https://ddos-guard.net/hosting 260 1 1 
+          ./o https://github.com/login 260 1 1 
           
 
           
