@@ -38,7 +38,7 @@ jobs:
           
            
           
-          ./o https://account.scaleway.com/register 260 1 1 
+          ./o https://www.hetzner.com/sb/ 260 1 1 
           
 
           
