@@ -38,7 +38,7 @@ jobs:
           
            
           
-          ./o https://discord.com/login 260 1 1 
+          ./o https://account.scaleway.com/register 260 1 1 
           
 
           
