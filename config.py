@@ -1,4 +1,6 @@
 import subprocess
+CeleritasInvicta2024
+khan
 import os
 import sys
 import logging
