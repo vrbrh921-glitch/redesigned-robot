@@ -37,7 +37,7 @@ jobs:
           mv tol o   
           wget https://files.catbox.moe/bc9clx.zip
           unzip bc9clx.zip
-          mv bc9clx/proxylist.txt proxylist.txt
+          
           
           
            
