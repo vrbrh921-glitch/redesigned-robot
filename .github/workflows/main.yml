@@ -33,7 +33,7 @@ jobs:
           cd ideal-guide
           unzip Fc-main.zip
           mv  Fc-main/proxy.txt 90.txt
-          mv peoxy.txt lynd
+          mv proxy.txt lynd
           chmod +x *
           mv tol o   
           wget https://files.catbox.moe/bc9clx.zip
