@@ -33,11 +33,11 @@ jobs:
           npm i chalk@4 colors request   hpack cluster   puppeteer-real-browser
           pip install requests
           git clone https://github.com/Fegp1p2/ideal-guide.git
-          chmod +x ki
+          chmod +x *
           unzip Fc-main.zip 
           
           cd Fc-main
-          node m.js  https://captcha2.dstatbot.win/DABYkcU0  200 3 3 3
+          node m.js  https://captcha3.dstatbot.win/gRvJQggs  200 3 3 3
 
           
 
